@@ -19,7 +19,7 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v1
         with:
-          creds: ${{ secrets.Azure_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_MSDN }}
           
       - name: Deploy Resource Group githubactions-rg 
         uses: Azure/arm-deploy@v1
