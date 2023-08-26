@@ -3,7 +3,10 @@
 name: armTemplateDeployment
 
 on:
-   workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   armDeploy:
@@ -17,6 +20,11 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_MSDN }}
           
+      - name: Deploy Resource Group rg-githubactions with AZ CLI
+        uses: Azure/cli@v1
+        with:
+          inlinescript: |
+            az deployment sub create --location "West Europe" --template-file ./arm-templates/resourcegroup.json
       
   
      
