@@ -55,7 +55,7 @@ jobs:
           subscriptionId: 11fe335c-5047-42c8-9362-cdd3871da39b
           template: ./arm-templates/storageaccount.json
           parameters: 
-           adminPassword= 
+           adminPassword=${{ secrets.AZURE_MSDN }} 
           deploymentMode: incremental
 
 
