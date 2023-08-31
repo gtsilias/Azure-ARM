@@ -25,6 +25,40 @@ jobs:
         with:
           inlinescript: |
             az deployment sub create --location "West Europe" --template-file ./arm-templates/resourcegroup.json
+
+      - name: Deploy Resource Group rg-githubactions
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: subscription
+          subscriptionId: 11fe335c-5047-42c8-9362-cdd3871da39b
+          region: Europe West
+          template: ./arm-templates/resourcegroup.json
+          deploymentName: rg-githubactions
+      
+      - name: Deploy Storage Account
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourcegroupName: rg-githunactions
+          subscriptionId: 11fe335c-5047-42c8-9362-cdd3871da39b
+          template: ./arm-templates/storageaccount.json
+          parameters: 
+           ./arm-templates/storageaccount.parameters.json
+           storageAccountName: azsrg001
+          deploymentMode: incremental
+
+      - name: Deploy Virtual machine 
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourcegroupName: rg-githunactions
+          subscriptionId: 11fe335c-5047-42c8-9362-cdd3871da39b
+          template: ./arm-templates/storageaccount.json
+          parameters: 
+           adminPassword= 
+          deploymentMode: incremental
+
+
       
   
      
